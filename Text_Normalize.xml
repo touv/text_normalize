@@ -14,7 +14,7 @@
 	</lead>
 	<date>2008-09-29</date>
 	<version>
-		<release>1.0.1</release>
+		<release>1.0.2</release>
 		<api>1.0</api>
 	</version>
 	<stability>
@@ -23,7 +23,7 @@
 	</stability>
 	<license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
 	<notes>
-		Correctino du fichier package.xml
+		Correction du fichier package.xml (bis)
 	</notes>
 	<contents>
 		<dir name="/">
@@ -41,9 +41,11 @@
 						<file name="Fra.php" role="php" />
 						<file name="Eng.php" role="php" />
 					</dir>
+					<file name="Symbols.php" role="php" />
 					<dir name="Symbols">
 						<file name="General.php" role="php" />
 					</dir>
+					<file name="Blankchars.php" role="php" />
 					<dir name="Blankchars">
 						<file name="General.php" role="php" />
 					</dir>
