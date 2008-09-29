@@ -4,7 +4,7 @@
 	<channel>pear.pxxo.net</channel>
 	<summary>Text_Normalize</summary>
 	<description>
-		http://www.touv.fr/spsip.php?id_article=145
+		http://github.com/touv/text_normalize/tree/master
 	</description>
 	<lead>
 		<name>Nicolas Thouvenin</name>
@@ -12,9 +12,9 @@
 		<email>nthouvenin@gmail.com</email>
 		<active>yes</active>
 	</lead>
-	<date>2008-05-21</date>
+	<date>2008-09-29</date>
 	<version>
-		<release>1.0.0</release>
+		<release>1.0.1</release>
 		<api>1.0</api>
 	</version>
 	<stability>
@@ -23,7 +23,7 @@
 	</stability>
 	<license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
 	<notes>
-	    First Release
+		Correctino du fichier package.xml
 	</notes>
 	<contents>
 		<dir name="/">
@@ -41,7 +41,12 @@
 						<file name="Fra.php" role="php" />
 						<file name="Eng.php" role="php" />
 					</dir>
-					<file name="Symbols.php" role="php" />
+					<dir name="Symbols">
+						<file name="General.php" role="php" />
+					</dir>
+					<dir name="Blankchars">
+						<file name="General.php" role="php" />
+					</dir>
 				</dir>
 			</dir>
 		</dir>
