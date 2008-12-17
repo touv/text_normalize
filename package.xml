@@ -14,7 +14,7 @@
 	</lead>
 	<date>2008-12-17</date>
 	<version>
-		<release>1.0.3</release>
+		<release>1.0.4</release>
 		<api>1.0</api>
 	</version>
 	<stability>
@@ -44,6 +44,7 @@
 					<file name="Symbols.php" role="php" />
 					<dir name="Symbols">
 						<file name="General.php" role="php" />
+						<file name="Sbt.php" role="php" />
 					</dir>
 					<file name="Blankchars.php" role="php" />
 					<dir name="Blankchars">
