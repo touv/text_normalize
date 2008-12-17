@@ -67,10 +67,18 @@ abstract class Text_Normalize_Symbols
                 include_once 'Text/Normalize/Symbols/General.php';
             return new Text_Normalize_Symbols_General;
         }
-
-        $lng = 'Text_Normalize_Symbols_'.ucfirst($lng);
+        $o = null;
         if (class_exists($lng)) {
             $o = new $lng;
+        }
+        else {
+            $lng = 'Text_Normalize_Symbols_'.ucfirst($lng);
+            include_once strtr($lng,'_','/').'.php';
+            if (class_exists($lng)) {
+                $o = new $lng;
+            }
+        }
+        if (!is_null($o)) {
             if ($o instanceof Text_Normalize_Symbols) return $o;
             else {
                 trigger_error(__METHOD__.' cannot build a class : `'.$lng.'` it\'s not an instance of Text_Normalize_Stopwords', E_USER_ERROR);

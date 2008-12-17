@@ -51,6 +51,13 @@ class Text_Normalize
     const Stopwords  = 8;
     const Uppercase  = 16;
     const Stemming   = 32;
+
+    public $BlankcharsLang = null;
+    public $SymbolsLang    = null;
+    public $StopwordsLang  = null;
+    public $UppercaseLang  = null;
+    public $StemmingLang   = null;
+
     /**
      * Chaine de caractère (forcement en UTF-8) à traiter
      * @var string
@@ -145,7 +152,7 @@ class Text_Normalize
     private function _Blankchars($str)
     {
         include_once('Text/Normalize/Blankchars.php');
-        $bchr = Text_Normalize_Blankchars::factory($this->_lang);
+        $bchr = Text_Normalize_Blankchars::factory(is_null($this->BlankcharsLang) ? $this->_lang : $this->BlankcharsLang);
         return $bchr->transform($str);
     }
     // }}}
@@ -161,7 +168,7 @@ class Text_Normalize
     private function _Symbols($str)
     {
         include_once('Text/Normalize/Symbols.php');
-        $symb = Text_Normalize_Symbols::factory($this->_lang);
+        $symb = Text_Normalize_Symbols::factory(is_null($this->SymbolsLang) ? $this->_lang : $this->SymbolsLang);
         return $symb->transform($str);
     }
     // }}}
@@ -177,7 +184,7 @@ class Text_Normalize
     private function _Stopwords($str)
     {
         include_once('Text/Normalize/Stopwords.php');
-        $swrd = Text_Normalize_Stopwords::factory($this->_lang);
+        $swrd = Text_Normalize_Stopwords::factory(is_null($this->StopwordsLang) ? $this->_lang : $this->StopwordsLang);
         return $swrd->transform($str);
     }
     // }}}
@@ -207,7 +214,7 @@ class Text_Normalize
     private function _Stemming($str)
     {
         include_once('Text/Normalize/Stemming.php');
-        $stm = Text_Normalize_Stemming::factory($this->_lang);
+        $stm = Text_Normalize_Stemming::factory(is_null($this->StemmingLang) ? $this->_lang : $this->StemmingLang);
         return $stm->transform($str);
     }
     // }}}

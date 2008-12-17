@@ -64,10 +64,18 @@ abstract class Text_Normalize_Stemming
             include_once 'Text/Normalize/Stemming/Eng.php';
             return new Text_Normalize_Stemming_Eng;
         }
-
-        $lng = 'Text_Normalize_Stemming_'.ucfirst($lng);
+        $o = null;
         if (class_exists($lng)) {
             $o = new $lng;
+        }
+        else {
+            $lng = 'Text_Normalize_Stemming_'.ucfirst($lng);
+            include_once strtr($lng,'_','/').'.php';
+            if (class_exists($lng)) {
+                $o = new $lng;
+            }
+        }
+        if (!is_null($o)) {
             if ($o instanceof Text_Normalize_Stemming) return $o;
             else {
                 trigger_error(__METHOD__.' cannot build a class : `'.$lng.'` it\'s not an instance of Text_Normalize_Stemming', E_USER_ERROR);

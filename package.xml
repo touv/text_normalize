@@ -12,9 +12,9 @@
 		<email>nthouvenin@gmail.com</email>
 		<active>yes</active>
 	</lead>
-	<date>2008-09-29</date>
+	<date>2008-12-17</date>
 	<version>
-		<release>1.0.2</release>
+		<release>1.0.3</release>
 		<api>1.0</api>
 	</version>
 	<stability>
@@ -23,7 +23,7 @@
 	</stability>
 	<license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
 	<notes>
-		Correction du fichier package.xml (bis)
+        Ajout de SBT dans Symbols et amélioration des chargements dynamiques dans les factory
 	</notes>
 	<contents>
 		<dir name="/">
