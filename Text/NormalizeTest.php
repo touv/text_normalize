@@ -6,6 +6,16 @@ ini_set('include_path', dirname(__FILE__).PATH_SEPARATOR.ini_get('include_path')
 require_once 'PHPUnit/Framework.php';
 require_once 'Text/Normalize.php';
 
+require_once 'Text/Normalize/Blankchars.php';
+  class Pirate extends Text_Normalize_Blankchars
+        {
+            public function transform($str)
+            {
+                return preg_replace('/[aeiouy]+/i', ' ', $str);
+            }
+        }
+
+
 class Text_NormalizeTest extends PHPUnit_Framework_TestCase
 {
     var $tn;
@@ -47,6 +57,11 @@ class Text_NormalizeTest extends PHPUnit_Framework_TestCase
         $this->tn->set('ordinateurs', 'fr');
         $ret = $this->tn->get(Text_Normalize::Stemming);
         $this->assertEquals('ordinateur', $ret);
+
+        $this->tn->set('les animaux et oiseaux de Bordeaux', 'fr');
+        $ret = $this->tn->get(Text_Normalize::Stemming);
+        $this->assertEquals('le animal et oiseau de Bordeaux', $ret);
+
     }
     function test_uppercase_bankschars()
     {
@@ -54,4 +69,23 @@ class Text_NormalizeTest extends PHPUnit_Framework_TestCase
         $ret = $this->tn->get(Text_Normalize::Uppercase | Text_Normalize::Blankchars);
         $this->assertEquals('azerty', $ret);
     }
+    function test_full()
+    {
+        // '"Interpréter, c\'est appauvrir, diminuer l\'image du monde, lui substituer un monde factice de `significations`." -- [Susan Sontag]'
+        // => interpreter  appauvrir  diminuer l'image du monde  substituer un monde factice de  signification     susan sontag
+        $this->tn->set('"Nous sommes à la fois un fluide qui se solidifie, un trésor qui s\'appauvrit, une histoire qui s\'écrit, une personnalité qui se crée." -- [Alexis Carrel]', 'fr');
+        $ret = $this->tn->get(Text_Normalize::Uppercase | Text_Normalize::Blankchars | Text_Normalize::Symbols | Text_Normalize::Stopwords | Text_Normalize::Stemming);
+        $this->assertEquals("nous somme a la un fluide se solidifie  un tresor s'appauvrit  une histoire s'ecrit  une personnalite se cree     alexis carrel", $ret);
+
+    }
+
+    function test_extend()
+    {
+        $this->tn->BlankcharsLang = 'Pirate';
+        $this->tn->set('AS Nancy Lorraine', 'fr');
+        $ret = $this->tn->get(Text_Normalize::Blankchars);
+        $this->assertEquals("S N nc  L rr n", $ret);
+
+    }
+
 }

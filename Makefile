@@ -10,6 +10,9 @@ all : test
 test :
 	$(PHPUNIT) Text/NormalizeTest
 
+push:
+	git push --tags
+
 release: Text_Normalize-`./extract-version.sh`.tgz
 
 Text_Normalize-`./extract-version.sh`.tgz: package.xml
