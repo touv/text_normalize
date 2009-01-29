@@ -49,13 +49,14 @@ class Text_Normalize
     const Blankchars = 1;
     const Symbols    = 4;
     const Stopwords  = 8;
-    const Uppercase  = 16;
+    const Uppercase  = 16; // deprecated since 1.0.5
+    const Lowercase  = 16;
     const Stemming   = 32;
 
     public $BlankcharsLang = null;
     public $SymbolsLang    = null;
     public $StopwordsLang  = null;
-    public $UppercaseLang  = null;
+    public $LowercaseLang  = null;
     public $StemmingLang   = null;
 
     /**
@@ -134,8 +135,8 @@ class Text_Normalize
         if (($this->_mode & self::Stopwords) === self::Stopwords) {
             $this->_output = $this->_Stopwords($this->_output);
         }
-        if (($this->_mode & self::Uppercase) === self::Uppercase) {
-            $this->_output = $this->_Uppercase($this->_output);
+        if (($this->_mode & self::Lowercase) === self::Lowercase) {
+            $this->_output = $this->_Lowercase($this->_output);
         }
         return trim($this->_output, ' ');
     }
@@ -189,7 +190,7 @@ class Text_Normalize
     }
     // }}}
 
-    // {{{ _Uppercase
+    // {{{ _Lowercase
     /**
      * Enleve les Majuscules
      *
@@ -197,7 +198,7 @@ class Text_Normalize
      *
      * @return string
      */
-    private function _Uppercase($str)
+    private function _Lowercase($str)
     {
         return strtolower($str);
     }

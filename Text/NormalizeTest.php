@@ -31,7 +31,7 @@ class Text_NormalizeTest extends PHPUnit_Framework_TestCase
     function test_uppercase()
     {
         $this->tn->set('HELLO', 'en');
-        $ret = $this->tn->get(Text_Normalize::Uppercase);
+        $ret = $this->tn->get(Text_Normalize::Lowercase);
         $this->assertEquals('hello', $ret);
     }
     function test_bankschars()
@@ -66,7 +66,7 @@ class Text_NormalizeTest extends PHPUnit_Framework_TestCase
     function test_uppercase_bankschars()
     {
         $this->tn->set('AzErTy "\(-)=}]@^\`|[{#~ ', 'en');
-        $ret = $this->tn->get(Text_Normalize::Uppercase | Text_Normalize::Blankchars);
+        $ret = $this->tn->get(Text_Normalize::Lowercase | Text_Normalize::Blankchars);
         $this->assertEquals('azerty', $ret);
     }
     function test_full()
@@ -74,7 +74,7 @@ class Text_NormalizeTest extends PHPUnit_Framework_TestCase
         // '"Interpréter, c\'est appauvrir, diminuer l\'image du monde, lui substituer un monde factice de `significations`." -- [Susan Sontag]'
         // => interpreter  appauvrir  diminuer l'image du monde  substituer un monde factice de  signification     susan sontag
         $this->tn->set('"Nous sommes à la fois un fluide qui se solidifie, un trésor qui s\'appauvrit, une histoire qui s\'écrit, une personnalité qui se crée." -- [Alexis Carrel]', 'fr');
-        $ret = $this->tn->get(Text_Normalize::Uppercase | Text_Normalize::Blankchars | Text_Normalize::Symbols | Text_Normalize::Stopwords | Text_Normalize::Stemming);
+        $ret = $this->tn->get(Text_Normalize::Lowercase | Text_Normalize::Blankchars | Text_Normalize::Symbols | Text_Normalize::Stopwords | Text_Normalize::Stemming);
         $this->assertEquals("nous somme a la un fluide se solidifie  un tresor s'appauvrit  une histoire s'ecrit  une personnalite se cree     alexis carrel", $ret);
 
     }

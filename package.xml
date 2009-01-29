@@ -12,9 +12,9 @@
 		<email>nthouvenin@gmail.com</email>
 		<active>yes</active>
 	</lead>
-	<date>2008-12-17</date>
+	<date>2009-01-29</date>
 	<version>
-		<release>1.0.4</release>
+		<release>1.0.5</release>
 		<api>1.0</api>
 	</version>
 	<stability>
@@ -23,13 +23,13 @@
 	</stability>
 	<license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
 	<notes>
-        Ajout de SBT dans Symbols et amélioration des chargements dynamiques dans les factory
+		Ajout d'une constante synonyme
 	</notes>
 	<contents>
 		<dir name="/">
 			<dir name="Text">
 				<file name="Normalize.php" role="php" />
-                <file name="NormalizeTest.php" role="test" />
+				<file name="NormalizeTest.php" role="test" />
 				<dir name="Normalize">
 					<file name="Stemming.php" role="php" />
 					<dir name="Stemming">
