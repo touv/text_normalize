@@ -70,9 +70,17 @@ abstract class Text_Normalize_Stemming
         }
         else {
             $lng = 'Text_Normalize_Stemming_'.ucfirst($lng);
-            include_once strtr($lng,'_','/').'.php';
-            if (class_exists($lng)) {
-                $o = new $lng;
+            $file = strtr($lng,'_','/').'.php';
+            $paths = explode(PATH_SEPARATOR, ini_get('include_path'));
+            foreach ($paths as $path) {
+                $fullpath = $path . '/' . $file;
+                if (file_exists($fullpath)) {
+                    include_once($fullpath);
+                    if (class_exists($lng)) {
+                        $o = new $lng;
+                    }
+                    break;
+                }
             }
         }
         if (!is_null($o)) {

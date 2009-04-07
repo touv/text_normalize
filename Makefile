@@ -8,7 +8,7 @@ RM=rm
 all : test
 
 test :
-	$(PHPUNIT) Text/NormalizeTest
+	$(PHPUNIT) Text_NormalizeTest Text/NormalizeTest.php
 
 push:
 	git push --tags

@@ -57,35 +57,34 @@ abstract class Text_Normalize_Blankchars
      */
     static function factory($lng)
     {
-        if (strcasecmp($lng, 'fr') === 0 or strcasecmp($lng, 'fra') === 0) {
-            if (!class_exists('Text_Normalize_Blankchars_General'))
-                include_once 'Text/Normalize/Blankchars/General.php';
-            return new Text_Normalize_Blankchars_General;
-        }
-        if (strcasecmp($lng, 'en') === 0 or strcasecmp($lng, 'eng') === 0) {
-            if (!class_exists('Text_Normalize_Blankchars_General'))
-                include_once 'Text/Normalize/Blankchars/General.php';
-            return new Text_Normalize_Blankchars_General;
-        }
         $o = null;
         if (class_exists($lng)) {
             $o = new $lng;
         }
         else {
             $lng = 'Text_Normalize_Blankchars_'.ucfirst($lng);
-            include_once strtr($lng,'_','/').'.php';
-            if (class_exists($lng)) {
-                $o = new $lng;
+            $file = strtr($lng,'_','/').'.php';
+            $paths = explode(PATH_SEPARATOR, ini_get('include_path'));
+            foreach ($paths as $path) {
+                $fullpath = $path . '/' . $file;
+                if (file_exists($fullpath)) {
+                    include_once($fullpath);
+                    if (class_exists($lng)) {
+                        $o = new $lng;
+                    }
+                    break;
+                }
             }
         }
         if (!is_null($o)) {
             if ($o instanceof Text_Normalize_Blankchars) return $o;
             else {
-                trigger_error(__METHOD__.' cannot build a class : `'.$lng.'` it\'s not an instance of Text_Normalize_Stopwords', E_USER_ERROR);
+                trigger_error(__METHOD__.' cannot build a class : `'.$lng.'` it\'s not an instance of Text_Normalize_Blankchars', E_USER_ERROR);
             }
         }
         else {
-            trigger_error(__METHOD__.' cannot build a non-existant class : `'.$lng.'`', E_USER_ERROR);
+            include_once 'Text/Normalize/Blankchars/General.php';
+            return new Text_Normalize_Blankchars_General;
         }
     }
     // }}}

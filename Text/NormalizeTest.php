@@ -40,6 +40,12 @@ class Text_NormalizeTest extends PHPUnit_Framework_TestCase
         $ret = $this->tn->get(Text_Normalize::Blankchars);
         $this->assertEquals('a b c', $ret);
     }
+    function test_bankschars2()
+    {
+        $this->tn->set('a,;:!?..b^*c', 'XXX');
+        $ret = $this->tn->get(Text_Normalize::Blankchars);
+        $this->assertEquals('a b c', $ret);
+    }
     function test_accents()
     {
         $this->tn->set('élève', 'fr');
