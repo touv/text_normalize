@@ -352,7 +352,7 @@ class Text_Normalize_Stemming_Eng extends Text_Normalize_Stemming
             }
 
             if 	($key = array_search (strtolower ($value),self::$ListCorresIRREG1_EN)) {
-                $word[] = $this->ListCorresIRREG2_EN[$key];
+                $word[] = self::$ListCorresIRREG2_EN[$key];
                 $regles[] = 'en26';
             }
         }
