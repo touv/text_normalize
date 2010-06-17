@@ -32,10 +32,10 @@
  * @link      http://www.touv.fr/spip.php?id_article=145
  */
 
-
+require_once 'Text/Normalize/Blankchars.php';
 
 /**
- * Classe pour supprimer les mots vides
+ * Classe traitant des voyelles en général
  *
  * @category  Text
  * @package   Text_Normalize
@@ -44,66 +44,20 @@
  * @license   http://opensource.org/licenses/lgpl-license.php LGPL
  * @link      http://www.touv.fr/spip.php?id_article=145
  */
-abstract class Text_Normalize_Stopwords
+class Text_Normalize_Vowels_General extends Text_Normalize_Vowels
 {
-    public static $data = array();
-    // {{{ factory
-    /**
-     * Usine
-     *
-     * @param string $lng
-     *
-     * @return Text_Normalize_Stopwords
-     */
-    static function factory($lng)
-    {
-        if (strcasecmp($lng, 'fr') === 0 or strcasecmp($lng, 'fra') === 0) {
-            include_once 'Text/Normalize/Stopwords/Fra.php';
-            return new Text_Normalize_Stopwords_Fra;
-        }
-        if (strcasecmp($lng, 'en') === 0 or strcasecmp($lng, 'eng') === 0) {
-            include_once 'Text/Normalize/Stopwords/Eng.php';
-            return new Text_Normalize_Stopwords_Eng;
-        }
-        $o = null;
-        if (class_exists($lng)) {
-            $o = new $lng;
-        }
-        else {
-            $lng = 'Text_Normalize_Stopwords_'.ucfirst($lng);
-            $file = strtr($lng,'_','/').'.php';
-            $paths = explode(PATH_SEPARATOR, ini_get('include_path'));
-            foreach ($paths as $path) {
-                $fullpath = $path . '/' . $file;
-                if (file_exists($fullpath)) {
-                    include_once($fullpath);
-                    if (class_exists($lng)) {
-                        $o = new $lng;
-                    }
-                    break;
-                }
-            }
-        }
-        if (!is_null($o)) {
-            if ($o instanceof Text_Normalize_Stopwords) return $o;
-            else {
-                trigger_error(__METHOD__.' cannot build a class : `'.$lng.'` it\'s not an instance of Text_Normalize_Stopwords', E_USER_ERROR);
-            }
-        }
-        else {
-            trigger_error(__METHOD__.' cannot build a non-existant class : `'.$lng.'`', E_USER_ERROR);
-        }
-    }
-    // }}}
-
+    static $data = array('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
     // {{{ transform
     /**
-     * supprime les mots vides
+     * Transformatino de la chaine
      *
      * @param string $str
      *
      * @return string
      */
-    abstract function transform($str);
+    public function transform($str)
+    {
+        return str_replace(self::$data, '', $str);
+    }
     // }}}
 }

@@ -52,12 +52,14 @@ class Text_Normalize
     const Uppercase  = 16; // deprecated since 1.0.5
     const Lowercase  = 16;
     const Stemming   = 32;
+    const Vowels     = 64;
 
     public $BlankcharsLang = null;
     public $SymbolsLang    = null;
     public $StopwordsLang  = null;
     public $LowercaseLang  = null;
     public $StemmingLang   = null;
+    public $VowelsLang     = null;
 
     /**
      * Chaine de caractère (forcement en UTF-8) à traiter
@@ -137,6 +139,9 @@ class Text_Normalize
         }
         if (($this->_mode & self::Lowercase) === self::Lowercase) {
             $this->_output = $this->_Lowercase($this->_output);
+        }
+        if (($this->_mode & self::Vowels) === self::Vowels) {
+            $this->_output = $this->_Vowels($this->_output);
         }
         return trim($this->_output, ' ');
     }
@@ -219,6 +224,23 @@ class Text_Normalize
         return $stm->transform($str);
     }
     // }}}
+
+    // {{{ _Vowels
+    /**
+     * Enleve les voyelles
+     *
+     * @param string $str chaine à traiter
+     *
+     * @return string
+     */
+    private function _Vowels($str)
+    {
+        include_once('Text/Normalize/Vowels.php');
+        $swrd = Text_Normalize_Vowels::factory(is_null($this->VowelsLang) ? $this->_lang : $this->VowelsLang);
+        return $swrd->transform($str);
+    }
+    // }}}
+
 }
 
 

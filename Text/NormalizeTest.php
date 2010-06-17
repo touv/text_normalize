@@ -58,6 +58,12 @@ class Text_NormalizeTest extends PHPUnit_Framework_TestCase
         $ret = $this->tn->get(Text_Normalize::Stopwords);
         $this->assertEquals('de ceux-ci et faire', $ret);
     }
+    function test_vowels()
+    {
+        $this->tn->set('avec chacune de celle qui font ceux-ci doivent maintenant et pour longtemps faire mieux', 'fr');
+        $ret = $this->tn->get(Text_Normalize::Vowels);
+        $this->assertEquals('vc chcn d cll q fnt cx-c dvnt mntnnt t pr lngtmps fr mx', $ret);
+    }
     function test_stemming()
     {
         $this->tn->set('ordinateurs', 'fr');

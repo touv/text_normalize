@@ -12,10 +12,10 @@
 		<email>nthouvenin@gmail.com</email>
 		<active>yes</active>
 	</lead>
-	<date>2009-04-10</date>
+	<date>2010-06-17</date>
 	<version>
-		<release>1.0.7</release>
-		<api>1.0</api>
+		<release>1.1.0</release>
+		<api>1.1</api>
 	</version>
 	<stability>
 		<release>stable</release>
@@ -48,6 +48,10 @@
 					</dir>
 					<file name="Blankchars.php" role="php" />
 					<dir name="Blankchars">
+						<file name="General.php" role="php" />
+                    </dir>
+                    <file name="Vowels.php" role="php" />
+					<dir name="Vowels">
 						<file name="General.php" role="php" />
 					</dir>
 				</dir>
