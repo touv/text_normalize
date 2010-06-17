@@ -90,9 +90,6 @@ abstract class Text_Normalize_Stopwords
                 trigger_error(__METHOD__.' cannot build a class : `'.$lng.'` it\'s not an instance of Text_Normalize_Stopwords', E_USER_ERROR);
             }
         }
-        else {
-            trigger_error(__METHOD__.' cannot build a non-existant class : `'.$lng.'`', E_USER_ERROR);
-        }
     }
     // }}}
 

@@ -161,8 +161,8 @@ class Text_Normalize
     private function _Blankchars($str)
     {
         include_once('Text/Normalize/Blankchars.php');
-        $bchr = Text_Normalize_Blankchars::factory(is_null($this->BlankcharsLang) ? $this->_lang : $this->BlankcharsLang);
-        return $bchr->transform($str);
+        $o = Text_Normalize_Blankchars::factory(is_null($this->BlankcharsLang) ? $this->_lang : $this->BlankcharsLang);
+        return !is_null($o) ? $o->transform($str) : $str;
     }
     // }}}
 
@@ -177,8 +177,8 @@ class Text_Normalize
     private function _Symbols($str)
     {
         include_once('Text/Normalize/Symbols.php');
-        $symb = Text_Normalize_Symbols::factory(is_null($this->SymbolsLang) ? $this->_lang : $this->SymbolsLang);
-        return $symb->transform($str);
+        $o = Text_Normalize_Symbols::factory(is_null($this->SymbolsLang) ? $this->_lang : $this->SymbolsLang);
+        return !is_null($o) ? $o->transform($str) : $str;
     }
     // }}}
 
@@ -193,8 +193,8 @@ class Text_Normalize
     private function _Stopwords($str)
     {
         include_once('Text/Normalize/Stopwords.php');
-        $swrd = Text_Normalize_Stopwords::factory(is_null($this->StopwordsLang) ? $this->_lang : $this->StopwordsLang);
-        return $swrd->transform($str);
+        $o = Text_Normalize_Stopwords::factory(is_null($this->StopwordsLang) ? $this->_lang : $this->StopwordsLang);
+        return !is_null($o) ? $o->transform($str) : $str;
     }
     // }}}
 
@@ -223,8 +223,8 @@ class Text_Normalize
     private function _Stemming($str)
     {
         include_once('Text/Normalize/Stemming.php');
-        $stm = Text_Normalize_Stemming::factory(is_null($this->StemmingLang) ? $this->_lang : $this->StemmingLang);
-        return $stm->transform($str);
+        $o = Text_Normalize_Stemming::factory(is_null($this->StemmingLang) ? $this->_lang : $this->StemmingLang);
+        return !is_null($o) ? $o->transform($str) : $str;
     }
     // }}}
 
@@ -239,11 +239,10 @@ class Text_Normalize
     private function _Vowels($str)
     {
         include_once('Text/Normalize/Vowels.php');
-        $swrd = Text_Normalize_Vowels::factory(is_null($this->VowelsLang) ? $this->_lang : $this->VowelsLang);
-        return $swrd->transform($str);
+        $o = Text_Normalize_Vowels::factory(is_null($this->VowelsLang) ? $this->_lang : $this->VowelsLang);
+        return !is_null($o) ? $o->transform($str) : $str;
     }
     // }}}
-
 
     // {{{ _Duplicates
     /**
