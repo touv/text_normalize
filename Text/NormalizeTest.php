@@ -64,6 +64,12 @@ class Text_NormalizeTest extends PHPUnit_Framework_TestCase
         $ret = $this->tn->get(Text_Normalize::Vowels);
         $this->assertEquals('vc chcn d cll q fnt cx-c dvnt mntnnt t pr lngtmps fr mx', $ret);
     }
+    function test_duplicates()
+    {
+        $this->tn->set('aabbccZZZZddeefffffffffffffff', null);
+        $ret = $this->tn->get(Text_Normalize::Duplicates);
+        $this->assertEquals('abcZdef', $ret);
+    }
     function test_stemming()
     {
         $this->tn->set('ordinateurs', 'fr');

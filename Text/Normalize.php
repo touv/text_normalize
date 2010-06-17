@@ -53,6 +53,7 @@ class Text_Normalize
     const Lowercase  = 16;
     const Stemming   = 32;
     const Vowels     = 64;
+    const Duplicates = 128;
 
     public $BlankcharsLang = null;
     public $SymbolsLang    = null;
@@ -112,7 +113,6 @@ class Text_Normalize
     }
     // }}}
 
-
     // {{{ get
     /**
      * Retourne la chaine normalizée
@@ -142,6 +142,9 @@ class Text_Normalize
         }
         if (($this->_mode & self::Vowels) === self::Vowels) {
             $this->_output = $this->_Vowels($this->_output);
+        }
+        if (($this->_mode & self::Duplicates) === self::Duplicates) {
+            $this->_output = $this->_Duplicates($this->_output);
         }
         return trim($this->_output, ' ');
     }
@@ -238,6 +241,21 @@ class Text_Normalize
         include_once('Text/Normalize/Vowels.php');
         $swrd = Text_Normalize_Vowels::factory(is_null($this->VowelsLang) ? $this->_lang : $this->VowelsLang);
         return $swrd->transform($str);
+    }
+    // }}}
+
+
+    // {{{ _Duplicates
+    /**
+     * Enleve les répétions de caratères
+     *
+     * @param string $str chaine à traiter
+     *
+     * @return string
+     */
+    private function _Duplicates($str)
+    {
+        return preg_replace('{(.)\1+}', '$1', $str);
     }
     // }}}
 
