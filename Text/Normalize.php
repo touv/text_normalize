@@ -62,6 +62,13 @@ class Text_Normalize
     public $StemmingLang   = null;
     public $VowelsLang     = null;
 
+    private $iBlankchars = null;
+    private $iSymbols    = null;
+    private $iStopwords  = null;
+    private $iLowercase  = null;
+    private $iStemming   = null;
+    private $iVowels     = null;
+
     /**
      * Chaine de caractère (forcement en UTF-8) à traiter
      * @var string
@@ -161,8 +168,10 @@ class Text_Normalize
     private function _Blankchars($str)
     {
         include_once('Text/Normalize/Blankchars.php');
-        $o = Text_Normalize_Blankchars::factory(is_null($this->BlankcharsLang) ? $this->_lang : $this->BlankcharsLang);
-        return !is_null($o) ? $o->transform($str) : $str;
+        $lng = is_null($this->Blankchars) ? $this->_lang : $this->Blankchars;
+        if (!isset($this->_iBlankchars[$lng]))
+            $this->_iBlankchars[$lng] = Text_Normalize_Blankchars::factory($lng);
+        return !is_null($this->_iBlankchars[$lng]) ? $this->_iBlankchars[$lng]->transform($str) : $str;
     }
     // }}}
 
@@ -177,8 +186,10 @@ class Text_Normalize
     private function _Symbols($str)
     {
         include_once('Text/Normalize/Symbols.php');
-        $o = Text_Normalize_Symbols::factory(is_null($this->SymbolsLang) ? $this->_lang : $this->SymbolsLang);
-        return !is_null($o) ? $o->transform($str) : $str;
+        $lng = is_null($this->SymbolsLang) ? $this->_lang : $this->SymbolsLang;
+        if (!isset($this->_iSymbols[$lng]))
+            $this->_iSymbols[$lng] = Text_Normalize_Symbols::factory($lng);
+        return !is_null($this->_iSymbols[$lng]) ? $this->_iSymbols[$lng]->transform($str) : $str;
     }
     // }}}
 
@@ -193,8 +204,10 @@ class Text_Normalize
     private function _Stopwords($str)
     {
         include_once('Text/Normalize/Stopwords.php');
-        $o = Text_Normalize_Stopwords::factory(is_null($this->StopwordsLang) ? $this->_lang : $this->StopwordsLang);
-        return !is_null($o) ? $o->transform($str) : $str;
+        $lng = is_null($this->StopwordsLang) ? $this->_lang : $this->StopwordsLang;
+        if (!isset($this->_iStopwords[$lng]))
+            $this->_iStopwords[$lng] = Text_Normalize_Stopwords::factory($lng);
+        return !is_null($this->_iStopwords[$lng]) ? $this->_iStopwords[$lng]->transform($str) : $str;
     }
     // }}}
 
@@ -223,8 +236,10 @@ class Text_Normalize
     private function _Stemming($str)
     {
         include_once('Text/Normalize/Stemming.php');
-        $o = Text_Normalize_Stemming::factory(is_null($this->StemmingLang) ? $this->_lang : $this->StemmingLang);
-        return !is_null($o) ? $o->transform($str) : $str;
+        $lng = is_null($this->StemmingLang) ? $this->_lang : $this->StemmingLang;
+        if (!isset($this->_iStemming[$lng]))
+            $this->_iStemming[$lng] = Text_Normalize_Stemming::factory($lng);
+        return !is_null($this->_iStemming[$lng]) ? $this->_iStemming[$lng]->transform($str) : $str;
     }
     // }}}
 
@@ -239,8 +254,10 @@ class Text_Normalize
     private function _Vowels($str)
     {
         include_once('Text/Normalize/Vowels.php');
-        $o = Text_Normalize_Vowels::factory(is_null($this->VowelsLang) ? $this->_lang : $this->VowelsLang);
-        return !is_null($o) ? $o->transform($str) : $str;
+        $lng = is_null($this->VowelsLang) ? $this->_lang : $this->VowelsLang;
+        if (!isset($this->_iVowels[$lng]))
+            $this->_iVowels[$lng] = Text_Normalize_Vowels::factory($lng);
+        return !is_null($this->_iVowels[$lng]) ? $this->_iVowels[$lng]->transform($str) : $str;
     }
     // }}}
 
