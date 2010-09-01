@@ -58,7 +58,7 @@ abstract class Text_Normalize_Blankchars
     static function factory($lng)
     {
         $o = null;
-        if (class_exists($lng)) {
+        if (class_exists($lng, false)) {
             $o = new $lng;
         }
         else {
@@ -69,7 +69,7 @@ abstract class Text_Normalize_Blankchars
                 $fullpath = $path . '/' . $file;
                 if (file_exists($fullpath)) {
                     include_once($fullpath);
-                    if (class_exists($lng)) {
+                    if (class_exists($lng, false)) {
                         $o = new $lng;
                     }
                     break;

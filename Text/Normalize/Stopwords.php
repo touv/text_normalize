@@ -66,7 +66,7 @@ abstract class Text_Normalize_Stopwords
             return new Text_Normalize_Stopwords_Eng;
         }
         $o = null;
-        if (class_exists($lng)) {
+        if (class_exists($lng, false)) {
             $o = new $lng;
         }
         else {
@@ -77,7 +77,7 @@ abstract class Text_Normalize_Stopwords
                 $fullpath = $path . '/' . $file;
                 if (file_exists($fullpath)) {
                     include_once($fullpath);
-                    if (class_exists($lng)) {
+                    if (class_exists($lng, false)) {
                         $o = new $lng;
                     }
                     break;
