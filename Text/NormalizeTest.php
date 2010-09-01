@@ -103,7 +103,6 @@ class Text_NormalizeTest extends PHPUnit_Framework_TestCase
         $this->tn->set('AS Nancy Lorraine', 'fr');
         $ret = $this->tn->get(Text_Normalize::Blankchars);
         $this->assertEquals("S N nc  L rr n", $ret);
-
     }
 
 }
