@@ -168,7 +168,7 @@ class Text_Normalize
     private function _Blankchars($str)
     {
         include_once('Text/Normalize/Blankchars.php');
-        $lng = is_null($this->Blankchars) ? $this->_lang : $this->Blankchars;
+        $lng = is_null($this->BlankcharsLang) ? $this->_lang : $this->BlankcharsLang;
         if (!isset($this->_iBlankchars[$lng]))
             $this->_iBlankchars[$lng] = Text_Normalize_Blankchars::factory($lng);
         return !is_null($this->_iBlankchars[$lng]) ? $this->_iBlankchars[$lng]->transform($str) : $str;
