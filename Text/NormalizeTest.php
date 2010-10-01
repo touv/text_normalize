@@ -70,6 +70,13 @@ class Text_NormalizeTest extends PHPUnit_Framework_TestCase
         $ret = $this->tn->get(Text_Normalize::Duplicates);
         $this->assertEquals('abcZdef', $ret);
     }
+    function test_sorting()
+    {
+        $this->tn->set('fff bbb aaa ddd eee ccc', null);
+        $ret = $this->tn->get(Text_Normalize::Sorting);
+        $this->assertEquals('aaa bbb ccc ddd eee fff', $ret);
+    }
+
     function test_stemming()
     {
         $this->tn->set('ordinateurs', 'fr');
