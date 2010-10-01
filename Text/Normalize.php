@@ -54,6 +54,7 @@ class Text_Normalize
     const Stemming   = 32;
     const Vowels     = 64;
     const Duplicates = 128;
+    const Sorting    = 256;
 
     public $BlankcharsLang = null;
     public $SymbolsLang    = null;
@@ -152,6 +153,9 @@ class Text_Normalize
         }
         if (($this->_mode & self::Duplicates) === self::Duplicates) {
             $this->_output = $this->_Duplicates($this->_output);
+        }
+        if (($this->_mode & self::Sorting) === self::Sorting) {
+            $this->_output = $this->_Sorting($this->_output);
         }
         return trim($this->_output, ' ');
     }
@@ -272,6 +276,22 @@ class Text_Normalize
     private function _Duplicates($str)
     {
         return preg_replace('{(.)\1+}', '$1', $str);
+    }
+    // }}}
+
+    // {{{ _Sorting
+    /**
+     * Tri les mots par ordre alphabétique
+     *
+     * @param string $str chaine à traiter
+     *
+     * @return string
+     */
+    private function _Sorting($str)
+    {
+        $array =  preg_split('/[\s]+/', $str);
+        sort($array);
+        return implode(' ', $array);
     }
     // }}}
 
